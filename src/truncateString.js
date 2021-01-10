@@ -99,7 +99,7 @@ class TruncateString extends PureComponent {
 
   setComponentRef = (element) => {
     this.componentRef = element
-    ref(element)
+    if (ref) ref(element)
   }
 
   setTextRef = (element) => {
