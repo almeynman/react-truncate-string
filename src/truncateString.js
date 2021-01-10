@@ -35,7 +35,7 @@ class TruncateString extends PureComponent {
     ellipsisString: PropTypes.string,
     truncateAt: PropTypes.number,
     text: PropTypes.string,
-    innerRef: PropTypes.ref,
+    innerRef: PropTypes.any,
   }
 
   static defaultProps = {
@@ -99,7 +99,8 @@ class TruncateString extends PureComponent {
 
   setComponentRef = (element) => {
     this.componentRef = element
-    if (this.props.innerRef) this.props.innerRef(element)
+    if (this.props.innerRef) 
+      this.props.innerRef.current = element
   }
 
   setTextRef = (element) => {
