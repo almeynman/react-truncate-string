@@ -6,12 +6,13 @@ export const truncateString = ({
   text,
   ellipsisString,
   measurements,
-  leftPercentage = 50
+  leftPercentage = 50,
 }) => {
   if (measurements.text > measurements.component) {
-    const size = percentage => measurements.component * (percentage / 100)
+    const size = (percentage) => measurements.component * (percentage / 100)
 
-    const portion = size => Math.floor((text.length * size) / measurements.text)
+    const portion = (size) =>
+      Math.floor((text.length * size) / measurements.text)
 
     const left = text.slice(
       0,
@@ -33,25 +34,26 @@ class TruncateString extends PureComponent {
   static propTypes = {
     ellipsisString: PropTypes.string,
     truncateAt: PropTypes.number,
-    text: PropTypes.string
+    text: PropTypes.string,
+    innerRef: PropTypes.ref,
   }
 
   static defaultProps = {
     ellipsisString: '...',
     text: '',
-    truncateAt: 50
+    truncateAt: 50,
   }
 
   state = {
     truncating: true,
-    truncatedString: null
+    truncatedString: null,
   }
 
   getTruncateString(text) {
     const measurements = {
       component: this.componentRef.offsetWidth,
       ellipsis: this.ellipsisRef.offsetWidth,
-      text: this.textRef.offsetWidth
+      text: this.textRef.offsetWidth,
     }
 
     const {ellipsisString} = this.props
@@ -60,7 +62,7 @@ class TruncateString extends PureComponent {
       measurements,
       text,
       ellipsisString,
-      leftPercentage: this.props.truncateAt
+      leftPercentage: this.props.truncateAt,
     })
   }
 
@@ -95,15 +97,16 @@ class TruncateString extends PureComponent {
     window.removeEventListener('resize', this.resetTruncate)
   }
 
-  setComponentRef = element => {
+  setComponentRef = (element) => {
     this.componentRef = element
+    ref(element)
   }
 
-  setTextRef = element => {
+  setTextRef = (element) => {
     this.textRef = element
   }
 
-  setEllipsisRef = element => {
+  setEllipsisRef = (element) => {
     this.ellipsisRef = element
   }
 
@@ -115,7 +118,7 @@ class TruncateString extends PureComponent {
       ...style,
       display: 'block',
       overflow: 'hidden',
-      whiteSpace: 'nowrap'
+      whiteSpace: 'nowrap',
     }
 
     return (
