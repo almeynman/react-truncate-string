@@ -112,7 +112,7 @@ class TruncateString extends PureComponent {
   }
 
   render() {
-    const {text, ellipsisString, truncateAt, style, ...otherProps} = this.props
+    const {text, ellipsisString, truncateAt, style, innerRef, ...otherProps} = this.props
     const {truncatedString, truncating} = this.state
 
     const componentStyle = {
